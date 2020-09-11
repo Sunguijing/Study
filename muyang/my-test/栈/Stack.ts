@@ -35,5 +35,10 @@ class Stack {
 		return this.items;
 	}
 }
-
+// import Stack from 'Stack';
+function is_matching(str: string) {
+	const stack = new Stack();
+	for (let i = 0; i < str.length; i++) {}
+}
+is_matching('sdf(ds(ew(we)rw) rwqq) qwewe');
 export default Stack;

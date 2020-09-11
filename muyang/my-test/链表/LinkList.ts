@@ -67,6 +67,9 @@ class LinkList {
 		if (index === 1) {
 			this.head = cNode.next;
 			delNode = cNode;
+			if (!this.head) {
+				this.tail = null;
+			}
 		} else {
 			let i = 1;
 			while (i !== index - 1) {

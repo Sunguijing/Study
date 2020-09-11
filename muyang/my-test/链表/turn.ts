@@ -32,7 +32,7 @@ function turn(linkData) {
 
 // turn(linkData);
 
-// 栈
+// 普通循环
 function turn1(linkData) {
 	let curNode, preNode;
 	for (var i = linkData.length; i > 0; i--) {
@@ -61,10 +61,35 @@ function turnStack(linkData) {
 	let item, topItem;
 	while (!stack.isEmpty()) {
 		item = stack.pop();
-		topItem = stack.top();
-		item.next = topItem;
+		if (stack.isEmpty()) {
+			item.next = null;
+			topItem = item;
+		} else {
+			topItem = stack.top();
+			item.next = topItem;
+		}
 	}
-	console.log(item);
+	console.log(topItem);
 }
 
-turnStack(linkData);
+// turnStack(linkData);
+
+// 递归
+function recursion(node) {
+	if (!node) {
+		return null;
+	}
+	if (!node.next) {
+		// console.log(node);
+		return node;
+	}
+
+	const nextNode = recursion(node.next);
+	console.log(node.next);
+	console.log(node);
+	node.next.next = node;
+	node.next = null;
+	return nextNode;
+}
+
+recursion(linkData.head);

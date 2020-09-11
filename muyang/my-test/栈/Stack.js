@@ -34,4 +34,10 @@ var Stack = /** @class */ (function () {
     };
     return Stack;
 }());
+// import Stack from 'Stack';
+function is_matching(str) {
+    var stack = new Stack();
+    for (var i = 0; i < str.length; i++) { }
+}
+is_matching('sdf(ds(ew(we)rw) rwqq) qwewe');
 exports["default"] = Stack;
