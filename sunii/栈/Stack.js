@@ -1,5 +1,4 @@
 // 创建栈
-let a = 11;
  function Stack() {
     let stack = [];
 
@@ -17,5 +16,9 @@ let a = 11;
     };
     this.clear = function(){ // 清除栈里面的元素
         stack = [];
+    };
+    this.size = function(){ // 返回栈的大小
+        return stack.length;
     }
+    
  }

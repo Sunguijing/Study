@@ -1,3 +1,36 @@
+// 作业1： 实现一个栈，除了常见的push, pop方法以外，提供一个min方法，返回栈中最小的元素，且时间复杂度为o(1)
+function MinStack(){
+    let min_stack = new Stack();
+    let data_stack = new Stack();
+
+    // push的时候，两个栈都要操作
+    this.push = function(item){
+        // data_stack.push(item);
+        if(min_stack.isEmpty() || item < min_stack.top()){
+            min_stack.push(item);
+        }else{
+            // 如果item大于等于栈顶元素，把min_stack的栈顶元素再放入一次
+            // min_stack的元素个数要和data_stack保持一致
+            min_stack.push(min_stack.top());
+        }
+    };
+    this.pop = function(){
+        data_stack.pop();
+        min_stack.pop();
+    };
+    this.min = function(){
+        return min_stack.top();
+    }
+}
+
+let data = new MinStack();
+data.push(2);
+data.push(3);
+data.push(1);
+console.log(data.min());
+
+
+
 // 使用栈，完成中序表达式转后续表达式
 // 例如： 运算表达式： 1+(4-2)/2  
 // 对于中序表达式： ["1","+","(","4","-","2",")","/","2"]
