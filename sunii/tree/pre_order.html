@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function BinTreeNode(data) {
+        this.data = data;
+        this.leftChild = null;
+        this.rightChild = null;
+    }
+    function BinaryTree() {
+        this.root = null;
+    }
+    BinaryTree.prototype.insert = function (node) {
+        let binTreeNode = new BinTreeNode(node);
+        if (this.root === null) {
+            this.root = binTreeNode;
+        } else {
+            let curr_node = this.root;
+            let parent;
+            while (true) {
+                parent = curr_node;
+                // 新加入的值如果小于父节点，则为左子树，否则为右子树
+                if(node < curr_node.data){
+                    curr_node = curr_node.leftChild;
+                    if(curr_node === null){
+                        parent.leftChild = binTreeNode;
+                        break;
+                    }
+                } else {
+                    curr_node = curr_node.rightChild;
+                    if(curr_node === null){
+                        parent.rightChild = binTreeNode;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    BinaryTree.prototype.pre_order = function(node){ // 前序遍历
+        if(node === null){
+            return null;
+        }
+        console.log(node.data);
+        this.pre_order(node.leftChild);
+        this.pre_order(node.rightChild);
+    }
+    BinaryTree.prototype.in_order = function(node){ // 中序遍历
+        if(node === null){
+            return null;
+        }
+        this.in_order(node.leftChild);
+        console.log(node.data);
+        this.in_order(node.rightChild);
+    }
+    BinaryTree.prototype.after_order = function(node){ // 后续遍历
+        if(node === null){
+            return null;
+        }
+        this.after_order(node.leftChild);
+        this.after_order(node.rightChild);
+        console.log(node.data);
+    }
+    // 非递归实现
+    BinaryTree.prototype.pre_order_nodig = function(node){ // 前序遍历
+        if(node === null){
+            return null;
+        }
+        let stack = [];
+        let curr_node = node;
+        while(curr_node){
+            console.log(curr_node.data);
+            if(curr_node.rightChild){
+                stack.push(curr_node.rightChild);
+            }
+            if(curr_node.leftChild){
+                curr_node = curr_node.leftChild;
+            } else {
+                curr_node = stack.pop();
+            }
+
+        }
+    }
+    BinaryTree.prototype.in_order_nodig = function(node){ // 中序遍历
+        if(node === null){
+            return null;
+        }
+        let stack = [];
+        let curr_node = node;
+        while(true){
+            while(curr_node){
+                stack.push(curr_node);
+                curr_node = curr_node.leftChild;
+            }
+            let pop_node = stack.pop();
+            console.log(pop_node.data);
+            curr_node = pop_node.rightChild;
+            if(!curr_node && stack.length === 0){
+                break;
+            }
+        }
+    }
+    BinaryTree.prototype.after_order_nodig = function(node){ // 后序遍历
+        if(node === null){
+            return null;
+        }
+        let stack1 = [];
+        let stack2 = [];
+        stack1.push(node);
+        while(stack1.length > 0){
+            let curr_node = stack1.pop();
+            stack2.push(curr_node.data);
+            if(curr_node.leftChild) stack1.push(curr_node.leftChild);
+            if(curr_node.rightChild) stack1.push(curr_node.rightChild);
+        }
+        while(stack2.length > 0){
+            console.log(stack2.pop());
+        }
+    }
+
+    //测试数据
+    var bt  = new BinaryTree();
+    var nums = [12,10,19,3,2,11,15,13];
+    for(var i = 0;i < nums.length;i ++){
+        bt.insert(nums[i]);
+    }
+    console.log(bt.root);
+
+    // 递归
+    // bt.pre_order(bt.root); // 前序遍历
+    // bt.in_order(bt.root);  // 中序遍历
+    // bt.after_order(bt.root);  // 后续遍历
+
+    // 非递归
+    // bt.pre_order_nodig(bt.root); // 前序遍历
+    // bt.in_order_nodig(bt.root); // 中序遍历
+    bt.after_order_nodig(bt.root); // 后序遍历
+</script>
+
+</html>
