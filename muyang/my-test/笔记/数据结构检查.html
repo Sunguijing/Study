@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    console.log('第一题: 杨辉三角')
+    //1.使用队列打印出杨辉三角
+    function yanghui(n) {
+      const queue = [];
+      queue.push(1, 0);
+      let line = '';
+      let pre = 0;
+      let index = 0;
+      while (true) {
+        const top = queue.shift();
+        if (top === 0) {
+          console.log(line);
+          if (index === n) {
+            break;
+          }
+          index += 1;
+          line = '';
+          pre = 0;
+          queue.push(1, 0);
+          continue;
+        }
+        line += `${top} `;
+        queue.push(top + pre);
+        pre = top;
+      }
+    }
+    yanghui(5)
+    console.log('第二题: 最大堆')
+    //2. 实现最大堆
+    class Node {
+      constructor(key, value = null) {
+        this.key = key;
+        this.value = value;
+      }
+    }
+
+    class MaxHeap {
+      constructor(size = 100) {
+        this.max_size = size;
+        this.cur_size = 0;
+        this.heap = [];
+        this.root = null;
+      }
+      up_movement(n) {
+        if (this.cur_size === 0) {
+          return true;
+        }
+        let cur_index = n;
+        let parent_index = Math.floor((cur_index - 1) / 2);
+        const heap = this.heap;
+        while (cur_index > 0) {
+          if (heap[parent_index].key >= heap[cur_index].key) {
+            break;
+          } else {
+            const temp = heap[parent_index];
+            heap[parent_index] = heap[cur_index];
+            heap[cur_index] = temp;
+            cur_index = parent_index;
+            parent_index = Math.floor((cur_index - 1) / 2);
+          }
+        }
+      }
+      insert(data) {
+        let cur_size = this.cur_size;
+        if (cur_size === this.max_size) {
+          console.log('超出最大范围')
+          return false;
+        }
+        const node = new Node(data);
+        this.heap[cur_size] = node;
+        this.up_movement(cur_size);
+        this.cur_size += 1;
+        return true;
+
+      }
+      init(arr) {
+        for (let i = 0; i < arr.length; i++) {
+          this.insert(arr[i]);
+        }
+        console.log(this.heap)
+      }
+    }
+    const max_heap = new MaxHeap();
+    max_heap.init([5, 2, 3, 8, 1])
+    max_heap.insert(10)
+
+    console.log('第三题:利用二叉搜索树实现一个简单的字典')
+    //3.利用二叉搜索树实现一个简单的字典
+    class TreeNode {
+      constructor(key, value) {
+        this.key = key;
+        this.value = value;
+        this.leftChild = null;
+        this.rightChild = null;
+        this.parent = null;
+      }
+    }
+    class Dict {
+      constructor() {
+        this.root = null;
+      }
+
+      set_tree_node(key, value) {
+        // 向字典中添加key-value对
+        return this.insert(key, value);
+      }
+
+      insert(key, value) {
+        if (key === null) {
+          return false;
+        }
+        if (!this.root) {
+          this.root = new TreeNode(key, value);
+          return true;
+        }
+        let cur_node = this.root;
+        const new_node = new TreeNode(key, value);
+        while (cur_node) {
+          if (cur_node.key > key) {
+            if (cur_node.leftChild) {
+              cur_node = cur_node.leftChild;
+            } else {
+              new_node.parent = cur_node;
+              cur_node.leftChild = new_node;
+              break;
+            }
+          } else if (cur_node.key < key) {
+            if (cur_node.rightChild) {
+              cur_node = cur_node.rightChild;
+            } else {
+              new_node.parent = cur_node;
+              cur_node.rightChild = new_node;
+              break;
+            }
+          } else {
+            cur_node.value = value;
+          }
+        }
+        return true;
+      }
+
+      get_tree_node(key) {
+        // 返回key所对应的value
+        let cur_node = this.root;
+        while (cur_node) {
+          if (cur_node.key > key) {
+            if (cur_node.leftChild) {
+              cur_node = cur_node.leftChild;
+              continue;
+            }
+            return null;
+          } else if (cur_node.key < key) {
+            if (cur_node.rightChild) {
+              cur_node = cur_node.rightChild;
+              continue;
+            }
+            return null;
+          } else {
+            return cur_node.value;
+          }
+        }
+      }
+
+      has_key = function (key) {
+        return this.get_tree_node(key) !== null;
+      }
+    };
+
+    var dict = new Dict();
+    dict.set_tree_node('name', 'javascript');
+    dict.set_tree_node('age', 20);
+    console.log(dict.has_key('class'));
+    console.log(dict.has_key('name'));
+    console.log(dict.get_tree_node("name"));
+    console.log(dict.get_tree_node("age"));
+
+    console.log('第四题:力扣230')
+    // 力扣230
+    var kthSmallest = function (root, k) {
+      var dict = new Dict();
+      for (let i = 0; i < root.length; i++) {
+        if (root[i] !== null) {
+          dict.set_tree_node(root[i])
+        }
+      }
+
+      function top_k(root, k) {
+        let cur_node = root;
+        let stack = [];
+        let index = 1;
+        while (true) {
+          while (cur_node) {
+            stack.push(cur_node);
+            cur_node = cur_node.leftChild;
+          }
+          const top = stack.pop();
+          if (index === k) {
+            return top.key;
+          }
+          index += 1;
+          cur_node = top.rightChild;
+          if (!cur_node && stack.length === 0) {
+            console.log('没有找到');
+            return null;
+          }
+        }
+
+      }
+      return top_k(dict.root, k);
+    };
+    console.log(kthSmallest([5, 3, 6, 2, 4, null, null, 1], 3))
+  </script>
+</body>
+
+</html>

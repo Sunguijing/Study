@@ -32,7 +32,7 @@ function isObstacle(x, y) {
 	return !!maze_array[y - 1][x - 1];
 }
 // 队列实现
-function migong(y, x) {
+function maze(y, x) {
 	if (isCrossBorder(x, y)) return;
 	const queue = new Queue();
 	let step1;
@@ -62,4 +62,4 @@ function migong(y, x) {
 	console.log(step1);
 }
 
-migong(9, 3);
+maze(9, 3);
