@@ -187,7 +187,7 @@
     console.log(dict.get_tree_node("age"));
 
     console.log('第四题:力扣230')
-    // 力扣230
+    // 力扣230 给定一个二叉搜索树，编写一个函数 kthSmallest 来查找其中第 k 个最小的元素。
     var kthSmallest = function (root, k) {
       var dict = new Dict();
       for (let i = 0; i < root.length; i++) {
@@ -220,7 +220,8 @@
       }
       return top_k(dict.root, k);
     };
-    console.log(kthSmallest([5, 3, 6, 2, 4, null, null, 1], 3))
+    // console.log(kthSmallest([5, 3, 6, 2, 4, null, null, 1], 3))
+    console.log(kthSmallest([3, 1, 4, null, 2], 1))
   </script>
 </body>
 
