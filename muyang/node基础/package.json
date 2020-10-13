@@ -1,0 +1,20 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "helloword.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "cowsay": "^1.4.0",
+    "express": "^4.17.1",
+    "inquirer": "^7.3.3",
+    "lodash": "^4.17.20",
+    "minimist": "^1.2.5",
+    "progress": "^2.0.3"
+  }
+}
