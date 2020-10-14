@@ -89,3 +89,16 @@ console.log(cowsay.say({
   wrapLength: 40, // Specifies roughly where the message should be wrapped. equivalent to cowsay -W
   mode: 'b', // One of 	"b", "d", "g", "p", "s", "t", "w", "y"
 }));
+
+// //事件触发器  =>发布订阅模式
+// const EventEmitter = require('events')
+// const eventEmitter = new EventEmitter()
+
+// eventEmitter.on('start', (start, end) => {
+//   console.log(`从 ${start} 到 ${end}`)
+// })
+
+// eventEmitter.emit('start', 1, 100)
+
+
+//http 模块
