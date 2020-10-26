@@ -23,12 +23,9 @@ const data = {
       next: {
         val: 3,
         next: {
-          val: 4,
-          next: {
-            val: 5,
-            next: null
-          }
-        },
+          val: 1,
+          next: null
+        }
       },
     },
   },
