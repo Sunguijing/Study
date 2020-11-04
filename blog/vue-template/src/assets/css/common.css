@@ -1,0 +1,70 @@
+body,h1,p,h2,ul,ol,li{margin: 0;padding: 0;}
+body{font-family: 'Microsoft YaHei';}
+/* 浮动 */
+.fl{float: left;}
+.fr{float: right;}
+/* 清理浮动 */
+.clearfix:before, .clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after{
+    clear:both;
+}
+.clearfix{
+    *zoom:1;/*ie6,7*/
+}
+ul, ol { list-style: none; }
+/*间距*/
+.mt5{margin-top: 5px;}
+.mt8{margin-top: 8px;}
+.mt10{margin-top: 10px;}
+.mt20{margin-top: 20px;}
+.mt30{margin-top: 30px;}
+.mt50{margin-top: 50px;}
+.mt100{margin-top: 100px;}
+.ml20{margin-left: 20px;}
+.ml40{margin-left: 40px;}
+.ml60{margin-left: 60px;}
+.ml10{margin-left: 10px;}
+.mr10{margin-right: 10px;}
+.mr20{margin-right: 20px;}
+
+/* 宽 */
+.w1000{width: 1000px;margin: 0 auto;}
+.w1200{width: 1200px;margin: 0 auto;}
+
+.vm{vertical-align: middle;}
+.vt{vertical-align: top;}
+.vb{vertical-align: bottom;}
+
+/** 重置超链接元素 **/
+a:link {
+    text-decoration: none;
+    color: #fff;
+}
+a:visited {
+    text-decoration: none;
+    color: #fff;
+}
+a:hover {   
+    text-decoration: none;
+    color: #fff;
+}
+
+.none{display: none;}
+.block{display: block;}
+.inline_block{display: inline-block;}
+
+/* 一行溢出显示... */
+.nowrap{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+
+.ct{text-align: center;}
+
+/* 定位 */
+.pr{position: relative;}
+.pa{position: absolute;}
